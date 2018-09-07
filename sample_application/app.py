@@ -1,67 +1,34 @@
-"""
-Application factory
-"""
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
-import logging.config
-from views import UnixTime, PrintArg, ExampleApiUsage
-from models import db
+from adsmutils import ADSFlask, get_date
+from views import bp
 
-from flask import Flask
-from flask.ext.restful import Api
-from flask.ext.discoverer import Discoverer
-from flask.ext.consulate import Consul, ConsulConnectionError
-
-
-def create_app():
+def create_app(**config):
     """
     Create the application and return it to the user
-
     :return: flask.Flask application
     """
 
-    app = Flask(__name__, static_folder=None)
-    app.url_map.strict_slashes = False
-
-    # Load config and logging
-    Consul(app)  # load_config expects consul to be registered
-    load_config(app)
-    logging.config.dictConfig(
-        app.config['SAMPLE_APPLICATION_LOGGING']
-    )
-
-    # Register extensions
-    api = Api(app)
-    Discoverer(app)
-    db.init_app(app)
-
-    api.add_resource(UnixTime, '/time')
-    api.add_resource(PrintArg, '/print/<string:arg>')
-    api.add_resource(ExampleApiUsage, '/search')
-
+    app = SampleADSFlask('sample', local_config=config)
+    app.url_map.strict_slashes = False    
+    app.register_blueprint(bp)
     return app
 
 
-def load_config(app):
-    """
-    Loads configuration in the following order:
-        1. config.py
-        2. local_config.py (ignore failures)
-        3. consul (ignore failures)
-    :param app: flask.Flask application instance
-    :return: None
-    """
+class SampleADSFlask(ADSFlask):
+    
+    def __init__(self, *args, **kwargs):
+        ADSFlask.__init__(self, *args, **kwargs)
+        
+        # HTTP client is provided by requests module; it handles connection pooling
+        # here we just set some headers we always want to use while sending a request
+        self.client.headers.update({'Authorization': 'Bearer {}'.format(self.config.get("API_TOKEN", ''))})
+        
+    def get_date(self, date=None):
+        """
+        :return: UTC date
+        """
 
-    app.config.from_pyfile('config.py')
-
-    try:
-        app.config.from_pyfile('local_config.py')
-    except IOError:
-        app.logger.warning("Could not load local_config.py")
-    try:
-        app.extensions['consul'].apply_remote_config()
-    except ConsulConnectionError, e:
-        app.logger.warning("Could not apply config from consul: {}".format(e))
-
-if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=True, use_reloader=False)
+        self.logger.info('Example of logging within the app.')
+        return get_date(date)
