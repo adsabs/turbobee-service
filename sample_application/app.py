@@ -31,4 +31,4 @@ class SampleADSFlask(ADSFlask):
         """
 
         self.logger.info('Example of logging within the app.')
-        return get_date(date)
+        return get_date(date).isoformat()

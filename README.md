@@ -2,7 +2,16 @@
 
 # adsabs-webservices-blueprint
 
-A sample Flask application for backend adsabs (micro) web services. To integrate into the ADS-API, an application must expose a `/resources` route that advertises that application's resources, scopes, and rate limits. 
+A sample Flask application for backend adsabs (micro) web services.
+
+When starting a new microservice, do:
+
+    * clone this repo
+    * replace all occurrences of 'sample_application' with 'your_name'
+    * rename 'sample application' to 'your_name' 
+    * git commit/push
+
+To integrate into the ADS-API, an application must expose a `/resources` route that advertises that application's resources, scopes, and rate limits. 
 
 `GET` on `/resources` should return `JSON` that looks like:
 
@@ -20,15 +29,6 @@ To facilitate that, one can define that route explitictly/manually or by using [
 
 ## development
 
-For convenience, a Vagrantfile and puppet manifest are available to facilitate development within a virtual machine. To use the vagrant VM defined here you will need to install *Vagrant* and *VirtualBox*.
-
-  * [Vagrant](https://docs.vagrantup.com)
-  * [VirtualBox](https://www.virtualbox.org)
-
-To load and enter the VM: `vagrant up && vagrant ssh`
-
-Alternatively, you can follow these simple steps:
-
   * virtualenv virtualenv
   * source virtualenv/bin/activate
   * pip install -r dev-requirements.txt
@@ -38,16 +38,10 @@ Alternatively, you can follow these simple steps:
 Note: cors.py will start the microservice in a simple HTTP webserver with approparite CORS headers (so that you can access localhost:5000/.... from a browser). Normally, you would run
 `python wsgi.py` or use a faster `gunicorn` to start `wsgi.py`.
 
-## database migrations (only relevant when a database is managed by the application)
+## database migrations
 
-To make changes to the database schema associated with the application:
+DB schema is defined by migrations (inside alembic) folder, use these operations:
 
-  * Update the database model in `models.py`
-  * execute: `python manage.py db migrate`
-  * if necessary, make manual changes in the migration scripts generated in `migrations/versions` (see notes below)
-  * execute: `python manage.py db upgrade`
-
-Notes:
-
-1. Installation of `Flask-Migrate` created the directory `migrations`. If the application uses `SQLALCHEMY_DATABASE_URI` as database URI, you can ignore the following remark. If the application uses `SQLALCHEMY_BINDS` to define the database URI, the script `migrations/env.py` needs a manual update: replace `current_app.config.get('SQLALCHEMY_DATABASE_URI')` by `current_app.config.get('SQLALCHEMY_BINDS')['sample']`
-2. After running the `migrate` step, some manual editing of the migration script will be necessary because of the definition of one of the table columns: the column `Column(postgresql.ARRAY(String))` gets translated into `sa.Column('bar', postgresql.ARRAY(String()), nullable=True)` in the migration, which will throw an exception if left unedited. The entry `String()` has to be changed into `sa.String()`. This is true in general for all types used in `ARRAY`.
+    * alembic upgrade head
+    * alembic downgrade base
+    * 

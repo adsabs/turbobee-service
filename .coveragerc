@@ -1,0 +1,4 @@
+
+[run]
+source = sample_application
+omit = sample_application/tests*

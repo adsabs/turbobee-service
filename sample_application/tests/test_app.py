@@ -24,7 +24,7 @@ class TestCase(unittest.TestCase):
 
 
     def test_date(self):
-        assert self.app.get_date('2018-09-07 19:13:44.327512+00:00') == '2018-09-07 19:13:44.327512+00:00'
+        assert self.app.get_date('2018-09-07 19:13:44.327512+00:00') == '2018-09-07T19:13:44.327512+00:00'
         
 
 

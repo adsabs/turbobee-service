@@ -7,12 +7,12 @@ bp = Blueprint('sample_application', __name__)
 
 
 @advertise(scopes=['scope1', 'scope2'], rate_limit = [5000, 3600*24])
+@bp.route('/date/<date>', methods=['GET', 'POST'])
 @bp.route('/date', methods=['GET'])
-@bp.route('/date/<date>', methods=['POST'])
 def date(date=None):
     
     if request.method == 'GET':
-        return jsonify({'date': current_app.get_date()}), 200
+        return jsonify({'date': current_app.get_date(date)}), 200
     elif request.method == 'POST':
         return jsonify({'date': current_app.get_date(date)}), 200
             

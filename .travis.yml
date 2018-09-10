@@ -4,5 +4,13 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install -r dev-requirements.txt
-script: "nosetests"
 sudo: false
+
+script:
+  - "py.test"
+
+after_success:
+  - "coveralls"
+
+notifications:
+  email: false

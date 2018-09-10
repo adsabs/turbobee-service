@@ -4,6 +4,7 @@ Database models
 
 import sqlalchemy as sa
 from adsmutils import get_date, UTCDateTime
+from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
