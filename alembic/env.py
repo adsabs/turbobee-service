@@ -44,7 +44,7 @@ def get_app_config(key):
     if opath not in sys.path:
         sys.path.insert(0, opath)
         
-    from sample_application import app as application
+    from turbobee_app import app as application
     app = application.create_app()
     
     with app.app_context() as c:

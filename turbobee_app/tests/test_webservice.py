@@ -1,8 +1,8 @@
 from flask.ext.testing import TestCase
 from flask import url_for, request
 import unittest
-from sample_application.models import Base
-from sample_application import app
+from turbobee_app.models import Base
+from turbobee_app import app
 import json
 import os
 from mock import mock
@@ -33,15 +33,15 @@ class TestServices(TestCase):
     def test_date(self):
         # if you want to know the urls: print self.app.url_map
         
-        r = self.client.post(url_for('sample_application.date', date='2018-09-10 20:15:57'))
+        r = self.client.post(url_for('turbobee_app.date', date='2018-09-10 20:15:57'))
         self.assertEqual(r.status_code,200)
         assert r.json == {u'date': u'2018-09-10T20:15:57+00:00'}
     
-        r = self.client.get(url_for('sample_application.date', date='2018-09-10 20:15:57'))
+        r = self.client.get(url_for('turbobee_app.date', date='2018-09-10 20:15:57'))
         self.assertEqual(r.status_code,200)
         assert r.json == {u'date': u'2018-09-10T20:15:57+00:00'}
     
-        r = self.client.get(url_for('sample_application.date'))
+        r = self.client.get(url_for('turbobee_app.date'))
         self.assertEqual(r.status_code,200)
         assert 'date' in r.json
         

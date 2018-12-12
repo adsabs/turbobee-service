@@ -8,7 +8,7 @@
 
 from werkzeug.serving import run_simple
 from werkzeug.wsgi import DispatcherMiddleware
-from sample_application import app
+from turbobee_app import app
 
 application = app.create_app()
 

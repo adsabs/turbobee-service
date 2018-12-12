@@ -3,7 +3,7 @@ from flask import current_app, request, Blueprint, jsonify
 from flask.ext.discoverer import advertise
 
 
-bp = Blueprint('sample_application', __name__)
+bp = Blueprint('turbobee_app', __name__)
 
 
 @advertise(scopes=['scope1', 'scope2'], rate_limit = [5000, 3600*24])

@@ -1,6 +1,6 @@
 
 import unittest
-from sample_application import app, models
+from turbobee_app import app, models
 import os, json
 from mock import mock
 
