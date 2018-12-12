@@ -1,6 +1,6 @@
 
 from flask import current_app, request, Blueprint, jsonify
-from flask.ext.discoverer import advertise
+from flask_discoverer import advertise
 
 
 bp = Blueprint('turbobee_app', __name__)

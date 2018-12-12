@@ -38,10 +38,15 @@ To facilitate that, one can define that route explitictly/manually or by using [
 Note: cors.py will start the microservice in a simple HTTP webserver with approparite CORS headers (so that you can access localhost:5000/.... from a browser). Normally, you would run
 `python wsgi.py` or use a faster `gunicorn` to start `wsgi.py`.
 
+## database setup
+
+Create a file named config.py or local_config.py and set the variable SQLALCHEMY_DATABASE_URI
+E.g., SQLALCHEMY_DATABASE_URI='sqlite:///database_name'
+
 ## database migrations
 
 DB schema is defined by migrations (inside alembic) folder, use these operations:
 
     * alembic upgrade head
     * alembic downgrade base
-    * 
+    

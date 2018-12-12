@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: flask-discoverer
+Version: 0.0.5
+Summary: Flask API autodiscovery
+Home-page: http://github.com/adsabs/flask-discoverer/
+Author: Vladimir Sudilovsky
+Author-email: vsudilovsky@cfa.harvard.edu
+License: MIT
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: Flask (==0.12.4)
+
+flask-discoverer
+-------------
+
+Flask extension that enables autodiscovery and broadcast of API endpoints
+
+
