@@ -41,6 +41,7 @@ Note: cors.py will start the microservice in a simple HTTP webserver with approp
 ## database setup
 
 Create a file named config.py or local_config.py and set the variable SQLALCHEMY_DATABASE_URI
+
 E.g., SQLALCHEMY_DATABASE_URI='sqlite:///database_name'
 
 ## database migrations
