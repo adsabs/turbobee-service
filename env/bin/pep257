@@ -1,6 +1,0 @@
-#!/home/ads/Documents/Programs/adsabs-webservices-blueprint/env/bin/python2
-from pep257 import main
-
-
-if __name__ == '__main__':
-    main()

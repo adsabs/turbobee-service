@@ -2,3 +2,4 @@
 local_config.py
 .vagrant
 logs/
+env/
