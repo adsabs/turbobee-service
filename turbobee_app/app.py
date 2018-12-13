@@ -32,3 +32,13 @@ class SampleADSFlask(ADSFlask):
 
         self.logger.info('Example of logging within the app.')
         return get_date(date).isoformat()
+
+	"""
+    def update_row(self, **kwargs):
+		with self.session_scope() as session:
+			x = session.query(model.Row).filter_by(qid=....).first()
+			y = model.Row(qid=23)
+			session.add(y)
+			session.commit()
+		print y
+	"""
