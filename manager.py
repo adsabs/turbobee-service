@@ -1,8 +1,8 @@
 from flask_script import Manager, Server
 from adsmutils import ADSFlask
-from views import bp
-from models import Pages
-from app import SampleADSFlask
+from turbobee_app.views import bp
+from turbobee_app.models import Pages
+from turbobee_app.app import SampleADSFlask
 
 app = SampleADSFlask('sample')
 app.url_map.strict_slashes = False    

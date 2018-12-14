@@ -1,14 +1,14 @@
-"""create pages table
+"""changing pages
 
-Revision ID: fe9bc3f6c9fe
-Revises: 2d6221a53fbe
-Create Date: 2018-12-12 17:45:19.489892
+Revision ID: cb1b430bc608
+Revises: fe9bc3f6c9fe
+Create Date: 2018-12-14 09:54:39.080453
 
 """
 
 # revision identifiers, used by Alembic.
-revision = 'fe9bc3f6c9fe'
-down_revision = '2d6221a53fbe'
+revision = 'cb1b430bc608'
+down_revision = 'fe9bc3f6c9fe'
 
 from alembic import op
 import sqlalchemy as sa
