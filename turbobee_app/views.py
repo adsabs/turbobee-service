@@ -1,10 +1,8 @@
-
-from flask import current_app, request, Blueprint, jsonify
+import pdb
+from flask import url_for, current_app, request, Blueprint, jsonify
 from flask_discoverer import advertise
 
-
 bp = Blueprint('turbobee_app', __name__)
-
 
 @advertise(scopes=['scope1', 'scope2'], rate_limit = [5000, 3600*24])
 @bp.route('/date/<date>', methods=['GET', 'POST'])
@@ -27,3 +25,20 @@ def api_usage():
     """
     r = current_app.client.get(current_app.config.get('SAMPLE_URL'))
     return r.json()
+
+@bp.route('/store/<string:bibcode>', methods=['GET', 'POST'])
+def store(bibcode):
+    if request.method == 'GET':
+        return bibcode
+    else:
+        pdb.set_trace()
+        return 'hello'
+            
+@bp.route('/store/search', methods=['GET'])
+def search():
+    
+    if request.method == 'GET':
+        return jsonify({'date': current_app.get_date(date)}), 200
+    elif request.method == 'POST':
+        return jsonify({'date': current_app.get_date(date)}), 200
+            

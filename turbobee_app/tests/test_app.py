@@ -9,10 +9,8 @@ class TestCase(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
         self.app = app.SampleADSFlask('test', local_config=\
-            {
-            'SQLALCHEMY_DATABASE_URI': 'sqlite:///',
-            'SQLALCHEMY_ECHO': False
-            })
+            {'SQLALCHEMY_DATABASE_URI': 'sqlite:///turbobee_cache',
+             'SQLALCHEMY_ECHO': False})
         models.Base.metadata.bind = self.app.db.session.get_bind()
         models.Base.metadata.create_all()
     
