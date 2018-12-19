@@ -1,13 +1,14 @@
 from flask_script import Manager, Server
-from adsmutils import ADSFlask
-from turbobee_app.views import bp
 from turbobee_app.models import Pages, Records
-from turbobee_app.app import SampleADSFlask
+from turbobee_app import app as application
 
-app = SampleADSFlask('sample')
-app.url_map.strict_slashes = False    
-app.register_blueprint(bp)
-
+app = application.create_app(**{
+       'SQLALCHEMY_ECHO': False,
+       'SQLALCHEMY_TRACK_MODIFICATIONS': False,
+       'TESTING': True,
+       'PROPAGATE_EXCEPTIONS': True,
+       'TRAP_BAD_REQUEST_ERRORS': True
+    })
 manager = Manager(app)
 
 @manager.shell

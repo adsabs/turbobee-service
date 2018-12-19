@@ -8,8 +8,8 @@ class TestCase(unittest.TestCase):
 
     def setUp(self):
         unittest.TestCase.setUp(self)
-        self.app = app.SampleADSFlask('test', local_config=\
-            {'SQLALCHEMY_DATABASE_URI': 'sqlite:///turbobee_cache',
+        self.app = app.create_app(local_config=\
+            {'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
              'SQLALCHEMY_ECHO': False})
         models.Base.metadata.bind = self.app.db.session.get_bind()
         models.Base.metadata.create_all()
@@ -21,9 +21,6 @@ class TestCase(unittest.TestCase):
         models.Base.metadata.drop_all()
 
 
-    def test_date(self):
-        assert self.app.get_date('2018-09-07 19:13:44.327512+00:00') == '2018-09-07T19:13:44.327512+00:00'
-        
 
 
 if __name__ == '__main__':

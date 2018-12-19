@@ -1,16 +1,12 @@
 from flask_testing import TestCase
 from flask import url_for, request
 import unittest
-from models import Base, Pages
-import app
-import json
-import os
+from turbobee_app.models import Base, Pages
+from turbobee_app import app
 from mock import mock
-import httpretty
 from adsmsg import TurboBeeMsg
 import datetime as dt
 from StringIO import StringIO
-import pdb
 
 class TestServices(TestCase):
     '''Tests that each route is an http response'''
@@ -18,7 +14,7 @@ class TestServices(TestCase):
     def create_app(self):
         '''Start the wsgi application'''
         a = app.create_app(**{
-               'SQLALCHEMY_DATABASE_URI': 'sqlite:///turbobee_cache',
+               'SQLALCHEMY_DATABASE_URI': 'sqlite:///',
                'SQLALCHEMY_ECHO': False,
                'SQLALCHEMY_TRACK_MODIFICATIONS': False,
                'TESTING': True,
