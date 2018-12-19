@@ -3,7 +3,7 @@ from flask import url_for, current_app, request, Blueprint, jsonify
 from flask import json
 from flask_discoverer import advertise
 from adsmsg import TurboBeeMsg
-from models import Pages
+from models import Pages, Records
 import datetime as dt
 import hashlib
 from sqlalchemy import exc
@@ -20,10 +20,12 @@ bp = Blueprint('turbobee_app', __name__)
 def store(qid=None):
     with current_app.session_scope() as session:
         if request.method == 'GET':
-            page = session.query(Pages).filter_by(qid=qid).first()
-            if not page:
+            record = session.query(Records).filter_by(bibcode=qid).first()
+            data = eval(record.bib_data)
+            pdb.set_trace()
+            if not record:
                 return jsonify({'qid': qid, 'msg': 'Not found'}), 404
-            return current_app.wrap_response(page)
+            return current_app.wrap_response(record)
         elif request.method == 'POST':
             out = []
             if not request.files:

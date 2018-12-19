@@ -1,8 +1,8 @@
 from flask_testing import TestCase
 from flask import url_for, request
 import unittest
-from turbobee_app.models import Base, Pages
-from turbobee_app import app
+from models import Base, Pages, Records
+import app
 from mock import mock
 from adsmsg import TurboBeeMsg
 import datetime as dt
@@ -14,7 +14,7 @@ class TestServices(TestCase):
     def create_app(self):
         '''Start the wsgi application'''
         a = app.create_app(**{
-               'SQLALCHEMY_DATABASE_URI': 'sqlite:///',
+               'SQLALCHEMY_DATABASE_URI': 'sqlite:///turbobee_cache',
                'SQLALCHEMY_ECHO': False,
                'SQLALCHEMY_TRACK_MODIFICATIONS': False,
                'TESTING': True,
@@ -142,6 +142,13 @@ class TestServices(TestCase):
             url_for('turbobee_app.store', bibcode='does_not_exist'))
 
         self.assertEqual(r.status_code, 404)
+
+    def test_template_get(self):
+        r = self.client.get(
+            url_for('turbobee_app.store', qid='1990SPIE.1185..171C'))
+
+        self.assertEqual(r.status_code, 200)
+
 
 
         
