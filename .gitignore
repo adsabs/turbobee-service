@@ -1,6 +1,7 @@
-*pyc
+*.pyc
 local_config.py
 .vagrant
 logs/
 env/
 *.swp
+*.bak

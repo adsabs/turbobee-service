@@ -28,8 +28,25 @@ class Pages(Base):
             'qid': self.qid,
             'content_type': self.content_type,
             'content': self.content,
-            'created': self.created,
-            'updated': self.updated,
-            'expires': self.expires,
-            'lifetime': self.lifetime
+            'created': self.created.isoformat(),
+            'updated': self.updated.isoformat(),
+            'expires': self.expires.isoformat(),
+            'lifetime': self.lifetime.isoformat()
+        }
+
+
+class Records(Base):
+    __tablename__ = 'records'
+    id = sa.Column(sa.Integer, primary_key=True, nullable=False)
+    bibcode = sa.Column(sa.String(255), nullable=False)
+    bib_data = sa.Column(sa.String(255), nullable=True)
+
+    def toJSON(self):
+        """Returns value formatted as python dict. Oftentimes
+        very useful for simple operations"""
+        
+        return {
+            'id': self.id,
+            'bibcode': self.bibcode,
+            'bib_data': self.bib_data
         }
