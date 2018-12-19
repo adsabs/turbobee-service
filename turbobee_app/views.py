@@ -11,17 +11,19 @@ from sqlalchemy.orm import load_only
 
 bp = Blueprint('turbobee_app', __name__)
 
-
-
-
 @advertise(scopes=['ads-consumer:turbobee'], rate_limit = [1000, 3600*24])
 @bp.route('/store/', methods=['POST'])
 @bp.route('/store/<string:qid>', methods=['GET', 'POST', 'DELETE'])
 def store(qid=None):
+
     with current_app.session_scope() as session:
         if request.method == 'GET':
             record = session.query(Records).filter_by(bibcode=qid).first()
             data = eval(record.bib_data)
+            title = data['title']
+            # affil links do not exist
+             
+            abstract = data['abstract']
             pdb.set_trace()
             if not record:
                 return jsonify({'qid': qid, 'msg': 'Not found'}), 404
