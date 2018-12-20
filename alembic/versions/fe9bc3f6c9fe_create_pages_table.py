@@ -17,7 +17,8 @@ from adsmutils import get_date, UTCDateTime
 def upgrade():
 	op.create_table('pages',
 		sa.Column('id', sa.Integer, nullable=False),
-		sa.Column('qid', sa.String(length=1024), nullable=False, unique=True),
+		sa.Column('qid', sa.String(length=32), nullable=False, unique=True),
+		sa.Column('target', sa.String(length=1024), nullable=True),
 		sa.Column('content_type', sa.String(length=255), nullable=True),
 		sa.Column('content', sa.Binary, nullable=True),
 		sa.Column('created', UTCDateTime, nullable=True, default=get_date),

@@ -11,7 +11,8 @@ Base = declarative_base()
 class Pages(Base):
     __tablename__ = 'pages'
     id = sa.Column(sa.Integer, primary_key=True, nullable=False)
-    qid = sa.Column(sa.String(1024), nullable=False, unique=True)
+    qid = sa.Column(sa.String(32), nullable=False, unique=True)
+    target = sa.Column(sa.String(1024), nullable=True)
     content_type = sa.Column(sa.String(255), nullable=True)
     content = sa.Column(sa.Binary, nullable=True)
     created = sa.Column(UTCDateTime, default=get_date)
@@ -26,6 +27,7 @@ class Pages(Base):
         return {
             'id': self.id,
             'qid': self.qid,
+            'target': self.target,
             'content_type': self.content_type,
             'content': self.content,
             'created': self.created.isoformat(),

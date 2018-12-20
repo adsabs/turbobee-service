@@ -56,6 +56,10 @@ class TestServices(TestCase):
             data=my_data)
 
         self.assertEqual(r.status_code, 200)
+        
+        with self.app.session_scope() as session:
+            assert len(session.query(Pages).all()) == 1
+
 
     # delete an existing page
     def test_proto_delete(self):

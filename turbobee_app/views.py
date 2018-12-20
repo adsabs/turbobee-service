@@ -8,6 +8,8 @@ import datetime as dt
 import hashlib
 from sqlalchemy import exc
 from sqlalchemy.orm import load_only
+import uuid
+from adsmutils import get_date
 
 bp = Blueprint('turbobee_app', __name__)
 
@@ -25,12 +27,12 @@ def store(qid=None):
                 return jsonify({'qid': qid, 'msg': 'Not found'}), 404
             return current_app.wrap_response(page)
         elif request.method == 'POST':
-            out = []
+            out = {}
             if not request.files:
                 return jsonify({'qid': qid, 'msg': 'Invalid params, missing data stream'}), 501
             
             # there might be many objects in there...
-            for fo in request.files:
+            for _, fo in request.files.items():
                 
                 if not hasattr(fo, 'read'):
                     continue # not a file object
@@ -43,19 +45,21 @@ def store(qid=None):
                 page = None
                 if msg.qid:
                     page = session.query(Pages).filter_by(qid=msg.qid).first()
-                    if page is None:
-                        op = 'created'
-                        # however, hash will be the same if the content is None (and that will fail db update)
-                        page = Pages(qid=msg.qid and msg.qid or hashlib.sha256(msg.get_value()).hexdigest())
-                        session.add(page)
-                        
+                
+                if page is None:
+                    op = 'created'
+                    page = Pages(qid=uuid.uuid4().hex)
+                    session.add(page)
+                
+                now = get_date()
+                page.target = msg.target or page.target # transfer the old defaults
                 page.content = msg.get_value()
-                page.created = msg.get_timestamp(msg.created) 
+                page.created = msg.created.seconds and msg.get_datetime(msg.created) or now 
                 page.content_type = current_app.guess_ctype(msg)
-                page.updated = msg.get_timestamp(msg.updated or msg.created)
+                page.updated = msg.updated.seconds and msg.get_datetime(msg.updated) or now
                 # should we provide defaults if not set?
-                page.expires = msg.expires.seconds and msg.get_timestamp(msg.expires) or None 
-                page.lifetime = msg.eol.seconds and msg.get_timestamp(msg.eol) or None
+                page.expires = msg.expires.seconds and msg.get_datetime(msg.expires) or None 
+                page.lifetime = msg.eol.seconds and msg.get_datetime(msg.eold) or None
     
                 # keep the qid for later use (when session is expunged)
                 qid = page.qid
@@ -106,7 +110,7 @@ def search():
     keys = request.args.keys()
 
     # default is 50, max is 100
-    rows = max(current_app.config.get('MAX_RETURNED', 100), int(request.args.get('rows') or 50)) 
+    rows = min(current_app.config.get('MAX_RETURNED', 100), int(request.args.get('rows') or 50)) 
     with current_app.session_scope() as session:
 
         if 'begin' in keys and 'end' in keys:
