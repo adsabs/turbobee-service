@@ -11,21 +11,28 @@ from sqlalchemy.orm import load_only
 
 bp = Blueprint('turbobee_app', __name__)
 
+@advertise(scopes=['ads-consumer:turbobee'], rate_limit = [1000, 3600*24])
 @bp.route('/', methods=['GET'])
 def template_test():
-    return render_template('abstract.html', 
-        title='title',
-        affiliation_name='affiliation name',
-        affiliation_link='affiliation link',
-        affiliation='affiliation',
-        abstract='abstract',
-        article_pub='article publication',
-        pub_date='publication date',
-        doi='doi text',
-        doi_link='doi link',
-        bibcode='bibcode',
-        permalink='permalink',
-        keywords='keywords')
+
+    qid = '1990SPIE.1185..171C'
+    with current_app.session_scope() as session:
+        record = session.query(Records).filter_by(bibcode=qid).first()
+        data = eval(record.bib_data)
+
+        return render_template('abstract.html', 
+            title=              data['title'][0],
+            authors=            data['author_facet'],
+            affiliation_link='affiliation link',
+            affiliation=        data['aff'],
+            abstract=           data['abstract'],
+            article_pub='article publication',
+            pub_date=           data['pubdate'],
+            doi=                data['doi'][0],
+            doi_link='doi link',
+            bibcode=            data['bibcode'],
+            permalink='permalink',
+            keywords='keywords')
 
 @advertise(scopes=['ads-consumer:turbobee'], rate_limit = [1000, 3600*24])
 @bp.route('/store/', methods=['POST'])

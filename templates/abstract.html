@@ -10,7 +10,9 @@
 
 <div id="authors-and-aff" class="s-authors-and-aff">
     <ul class="list-inline">
-        <li class="author"><a href="{{affiliation_link}}">{{affiliation_name}}</a><span class="affiliation hide"> (<i>{{affiliation}}</i>)</span>;</li>
+    {% for author in authors %}
+        <li class="author"><a href="{{affiliation_link}}">{{author}}</a><span class="affiliation hide"> (<i>{{affiliation}}</i>)</span>;</li>
+    {% endfor %}
     </ul>
 </div>
 
