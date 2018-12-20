@@ -72,6 +72,12 @@ class TestServices(TestCase):
         self.assertEqual(r.status_code, 200)
         r = self.client.head(url_for('turbobee_app.store_get', qid=msg.qid))
         self.assertEqual(r.status_code, 200)
+        
+        r = self.client.get(url_for('turbobee_app.store_get', qid='foo'))
+        self.assertEqual(r.status_code, 404)
+        r = self.client.head(url_for('turbobee_app.store_get', qid='foo'))
+        self.assertEqual(r.status_code, 404)
+        
 
     def test_proto_empty(self):
         msg = TurboBeeMsg()
@@ -147,22 +153,6 @@ class TestServices(TestCase):
 
         self.assertEqual(r.status_code, 200)
 
-    # get a page that exists
-    def test_proto_get(self):
-        page = Pages(qid='wxyz', content='hi')
-        self.app.db.session.add(page)
-        self.app.db.session.commit()
-        r = self.client.get(
-            url_for('turbobee_app.store', qid='wxyz'))
-
-        self.assertEqual(r.status_code, 200)
-
-    # get a page that doesn't exist
-    def test_proto_get_dne(self):
-        r = self.client.get(
-            url_for('turbobee_app.store', qid='does_not_exist'))
-
-        self.assertEqual(r.status_code, 404)
 
 
         

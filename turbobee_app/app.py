@@ -17,7 +17,7 @@ def create_app(**config):
     :return: flask.Flask application
     """
 
-    app = TurboBeeADSFlask('turbobee', local_config=config)
+    app = TurboBeeADSFlask('turbobee', local_config=config, static_folder=None)
     Discoverer(app)
     app.url_map.strict_slashes = False    
     app.register_blueprint(bp)

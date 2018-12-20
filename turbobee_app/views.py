@@ -5,17 +5,15 @@ from flask_discoverer import advertise
 from adsmsg import TurboBeeMsg
 from models import Pages
 import datetime as dt
-import hashlib
 from sqlalchemy import exc
 from sqlalchemy.orm import load_only
-import uuid
 from adsmutils import get_date
 
 bp = Blueprint('turbobee_app', __name__)
 
 
 
-@advertise(scopes=[''], rate_limit = [1000, 3600*24])
+@advertise(scopes=[], rate_limit = [1000, 3600*24])
 @bp.route('/<string:qid>', methods=['GET', 'HEAD'])
 def store_get(qid=None):
     if request.method == 'GET':
@@ -35,8 +33,8 @@ def store_get(qid=None):
 
 
 @advertise(scopes=['ads-consumer:turbobee'], rate_limit = [1000, 3600*24])
-@bp.route('/', methods=['POST'])
-@bp.route('/<string:qid>', methods=['POST', 'DELETE'])
+@bp.route('/update', methods=['POST'])
+@bp.route('/update/<string:qid>', methods=['POST', 'DELETE'])
 def store(qid=None):
     
     if request.method == 'GET':
