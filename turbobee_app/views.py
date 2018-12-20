@@ -20,69 +20,41 @@ bp = Blueprint('turbobee_app', __name__)
 @bp.route('/store/', methods=['POST'])
 @bp.route('/store/<string:qid>', methods=['GET', 'POST', 'DELETE'])
 def store(qid=None):
-    with current_app.session_scope() as session:
-        if request.method == 'GET':
+    
+    if request.method == 'GET':
+        with current_app.session_scope() as session:
             page = session.query(Pages).filter_by(qid=qid).first()
             if not page:
                 return jsonify({'qid': qid, 'msg': 'Not found'}), 404
             return current_app.wrap_response(page)
-        elif request.method == 'POST':
-            out = {}
-            if not request.files:
-                return jsonify({'qid': qid, 'msg': 'Invalid params, missing data stream'}), 501
-            
-            # there might be many objects in there...
-            for _, fo in request.files.items():
-                
-                if not hasattr(fo, 'read'):
-                    continue # not a file object
-                
-                # assuming we are not going to crash...(?)
-                msg = TurboBeeMsg.loads('adsmsg.turbobee.TurboBeeMsg', fo.read())
-                
-                # object may already be there, we are updating it...
-                op = 'updated'
-                page = None
-                if msg.qid:
-                    page = session.query(Pages).filter_by(qid=msg.qid).first()
-                
-                if page is None:
-                    op = 'created'
-                    page = Pages(qid=uuid.uuid4().hex)
-                    session.add(page)
-                
-                now = get_date()
-                page.target = msg.target or page.target # transfer the old defaults
-                page.content = msg.get_value()
-                page.created = msg.created.seconds and msg.get_datetime(msg.created) or now 
-                page.content_type = current_app.guess_ctype(msg)
-                page.updated = msg.updated.seconds and msg.get_datetime(msg.updated) or now
-                # should we provide defaults if not set?
-                page.expires = msg.expires.seconds and msg.get_datetime(msg.expires) or None 
-                page.lifetime = msg.eol.seconds and msg.get_datetime(msg.eold) or None
-    
-                # keep the qid for later use (when session is expunged)
-                qid = page.qid
-                
-                try:
-                    session.commit()
-                except exc.IntegrityError as e:
-                    session.rollback()
-                    if 'errors' not in out:
-                        out['errors'] = []
-                    out['errors'].append({'qid': qid, 'msg': e.message})
-                
-                if op not in out:
-                    out[op] = []
-                out[op].append(qid)
-            
-            if 'errors' in out:
-                return jsonify(out), 400
-            return jsonify(out), 200
+    elif request.method == 'POST':
+        out = {}
+        if not request.files:
+            return jsonify({'qid': qid, 'msg': 'Invalid params, missing data stream'}), 501
         
-        elif request.method == 'DELETE':
-            pages = session.query(Pages).options(load_only('qid')).filter_by(qid=qid).first()
+        # there might be many objects in there...
+        msgs = []
+        for _, fo in request.files.items():
             
+            if not hasattr(fo, 'read'):
+                continue # not a file object
+            
+            # assuming we are not going to crash...(?)
+            msg = TurboBeeMsg.loads('adsmsg.turbobee.TurboBeeMsg', fo.read())
+            msgs.append(msg)
+            
+        out = []
+        if len(msgs):
+            out = current_app.set_pages(msgs)
+        
+        if 'errors' in out:
+            return jsonify(out), 400
+        return jsonify(out), 200
+    
+    elif request.method == 'DELETE':
+        with current_app.session_scope() as session:
+            pages = session.query(Pages).options(load_only('qid')).filter_by(qid=qid).first()
+        
             qid = None
             if not pages:
                 return jsonify({'qi': qid, 'msg': 'Not found'}), 404

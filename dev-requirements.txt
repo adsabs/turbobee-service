@@ -8,3 +8,4 @@ pytest-cache==1.0
 pytest-cov==2.2.0
 pytest-pep8==1.0.6
 mock==1.3.0
+testing.postgresql==1.2.1

@@ -16,7 +16,7 @@ from adsmutils import get_date, UTCDateTime
 
 def upgrade():
 	op.create_table('pages',
-		sa.Column('id', sa.Integer, nullable=False),
+		sa.Column('id', sa.Integer, nullable=False, autoincrement=True),
 		sa.Column('qid', sa.String(length=32), nullable=False, unique=True),
 		sa.Column('target', sa.String(length=1024), nullable=True),
 		sa.Column('content_type', sa.String(length=255), nullable=True),
@@ -25,8 +25,16 @@ def upgrade():
 		sa.Column('updated', UTCDateTime, nullable=True, default=get_date),
 		sa.Column('expires', UTCDateTime, nullable=True),
 		sa.Column('lifetime', UTCDateTime, nullable=True),
+		sa.Column('owner', sa.Integer),
 		sa.PrimaryKeyConstraint('id')
-	) 
+	)
+	
+	op.create_index('ix_created', 'pages', ['created'])
+	op.create_index('ix_updated', 'pages', ['updated'])
+	op.create_index('ix_expires', 'pages', ['expires'])
+	op.create_index('ix_lifetime', 'pages', ['lifetime'])
+	op.create_index('ix_target', 'pages', ['target'])
+
 
 def downgrade():
 	op.drop_table('pages')

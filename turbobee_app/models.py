@@ -5,6 +5,7 @@ Database models
 import sqlalchemy as sa
 from adsmutils import get_date, UTCDateTime
 from sqlalchemy.ext.declarative import declarative_base
+from datetime import datetime
 
 Base = declarative_base()
 
@@ -19,22 +20,38 @@ class Pages(Base):
     updated = sa.Column(UTCDateTime, default=get_date)
     expires = sa.Column(UTCDateTime)
     lifetime = sa.Column(UTCDateTime)
+    owner = sa.Column(sa.Integer)
+    
+    valid_fields = set(['id', 'qid', 'owner', 'target', 'content', 'content_type', 
+                         'created', 'updated', 'expires', 'lifetime', 'owner'])
+        
 
-    def toJSON(self):
+    def toJSON(self, fields=None):
         """Returns value formatted as python dict. Oftentimes
         very useful for simple operations"""
         
-        return {
-            'id': self.id,
-            'qid': self.qid,
-            'target': self.target,
-            'content_type': self.content_type,
-            'content': self.content,
-            'created': self.created.isoformat(),
-            'updated': self.updated.isoformat(),
-            'expires': self.expires and self.expires.isoformat() or None,
-            'lifetime': self.lifetime and self.lifetime.isoformat() or None
-        }
+        if fields:
+            out = {}
+            for f in fields:
+                x = getattr(self, f)
+                if x is not None:
+                    if isinstance(x, datetime):
+                        x = x.isoformat()
+                out[f] = x
+            return out
+        else:
+            return {
+                'id': self.id,
+                'qid': self.qid,
+                'target': self.target,
+                'content_type': self.content_type,
+                'content': self.content,
+                'created': self.created and self.created.isoformat() or None,
+                'updated': self.updated and self.updated.isoformat() or None,
+                'expires': self.expires and self.expires.isoformat() or None,
+                'lifetime': self.lifetime and self.lifetime.isoformat() or None,
+                'owner': self.owner
+            }
 
 
 class Records(Base):

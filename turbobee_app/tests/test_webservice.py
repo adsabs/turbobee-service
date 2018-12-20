@@ -33,10 +33,17 @@ class TestServices(TestCase):
 
 
 
-    def test_proto_msg(self):
+    def test_store_post(self):
         msg = TurboBeeMsg()
-        msg.created = msg.get_timestamp(dt.datetime.utcnow())
+        now = dt.datetime.utcnow()
+        msg.created = msg.get_timestamp(now)
+        msg.updated = msg.get_timestamp(now)
+        msg.expires = msg.get_timestamp(now)
+        msg.eol = msg.get_timestamp(now)
         msg.set_value('hello world')
+        msg.ctype = msg.ContentType.html
+        msg.target = 'https:///some.com'
+        msg.owner = 234
         my_data = {'file_field': (StringIO(msg.dump()[1]), 'turbobee_msg.proto') }
 
         r = self.client.post(
@@ -45,6 +52,21 @@ class TestServices(TestCase):
             data=my_data)
 
         self.assertEqual(r.status_code, 200)
+        assert len(r.json['created']) == 1
+        
+        msg2 = msg.loads(*msg.dump())
+        msg.qid = r.json['created'][0]
+        r = self.client.post(
+            url_for('turbobee_app.store'), 
+            content_type='multipart/form-data',
+            data={
+                'foo': (StringIO(msg.dump()[1]), 'turbobee_msg.proto'),
+                'bar': (StringIO(msg2.dump()[1]), 'turbobee_msg.proto'),
+            })
+        self.assertEqual(r.status_code, 200)
+        assert len(r.json['created']) == 1
+        assert len(r.json['updated']) == 1
+        
 
     def test_proto_empty(self):
         msg = TurboBeeMsg()
