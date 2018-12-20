@@ -17,8 +17,8 @@ bp = Blueprint('turbobee_app', __name__)
 
 
 @advertise(scopes=['ads-consumer:turbobee'], rate_limit = [1000, 3600*24])
-@bp.route('/store/', methods=['POST'])
-@bp.route('/store/<string:qid>', methods=['GET', 'POST', 'DELETE'])
+@bp.route('/', methods=['POST'])
+@bp.route('/<string:qid>', methods=['GET', 'POST', 'DELETE'])
 def store(qid=None):
     
     if request.method == 'GET':
@@ -76,7 +76,7 @@ def str_to_dt(s):
 
 
 @advertise(scopes=['ads-consumer:turbobee'], rate_limit = [1000, 3600*24])
-@bp.route('/store/search', methods=['GET'])
+@bp.route('/search', methods=['GET'])
 def search():
 
     keys = request.args.keys()
