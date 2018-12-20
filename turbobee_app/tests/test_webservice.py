@@ -32,19 +32,6 @@ class TestServices(TestCase):
         self.app.db = None
 
 
-    def test_date(self):
-        # if you want to know the urls: print self.app.url_map
-        r = self.client.post(url_for('turbobee_app.date', date='2018-09-10 20:15:57'))
-        self.assertEqual(r.status_code,200)
-        assert r.json == {u'date': u'2018-09-10T20:15:57+00:00'}
-    
-        r = self.client.get(url_for('turbobee_app.date', date='2018-09-10 20:15:57'))
-        self.assertEqual(r.status_code,200)
-        assert r.json == {u'date': u'2018-09-10T20:15:57+00:00'}
-    
-        r = self.client.get(url_for('turbobee_app.date'))
-        self.assertEqual(r.status_code,200)
-        assert 'date' in r.json
 
     def test_proto_msg(self):
         msg = TurboBeeMsg()
@@ -53,7 +40,7 @@ class TestServices(TestCase):
         my_data = {'file_field': (StringIO(msg.dump()[1]), 'turbobee_msg.proto') }
 
         r = self.client.post(
-            url_for('turbobee_app.store', bibcode='asdf'), 
+            url_for('turbobee_app.store', qid='asdf'), 
             content_type='multipart/form-data',
             data=my_data)
 
@@ -64,7 +51,7 @@ class TestServices(TestCase):
         my_data = {'file_field': (StringIO(msg.dump()[1]), 'turbobee_msg.proto') }
 
         r = self.client.post(
-            url_for('turbobee_app.store', bibcode='asdf'), 
+            url_for('turbobee_app.store', qid='asdf'), 
             content_type='multipart/form-data',
             data=my_data)
 
@@ -72,12 +59,15 @@ class TestServices(TestCase):
 
     # delete an existing page
     def test_proto_delete(self):
-        r = self.client.delete(url_for('turbobee_app.store', bibcode='wxyz'))
+        with self.app.session_scope() as session:
+            session.add(Pages(qid='wxyz'))
+            session.commit()
+        r = self.client.delete(url_for('turbobee_app.store', qid='wxyz'))
         self.assertEqual(r.status_code, 200)
 
     # delete a page that does not exist
-    def test_proto_delete(self):
-        r = self.client.delete(url_for('turbobee_app.store', bibcode='does_not_exist'))
+    def test_proto_delete_ne(self):
+        r = self.client.delete(url_for('turbobee_app.store', qid='does_not_exist'))
         self.assertEqual(r.status_code, 404)
 
     # search for pages with specified timestamp
@@ -132,14 +122,14 @@ class TestServices(TestCase):
         self.app.db.session.add(page)
         self.app.db.session.commit()
         r = self.client.get(
-            url_for('turbobee_app.store', bibcode='wxyz'))
+            url_for('turbobee_app.store', qid='wxyz'))
 
         self.assertEqual(r.status_code, 200)
 
     # get a page that doesn't exist
     def test_proto_get_dne(self):
         r = self.client.get(
-            url_for('turbobee_app.store', bibcode='does_not_exist'))
+            url_for('turbobee_app.store', qid='does_not_exist'))
 
         self.assertEqual(r.status_code, 404)
 

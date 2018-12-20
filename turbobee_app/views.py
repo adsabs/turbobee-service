@@ -32,6 +32,9 @@ def store(qid=None):
             # there might be many objects in there...
             for fo in request.files:
                 
+                if not hasattr(fo, 'read'):
+                    continue # not a file object
+                
                 # assuming we are not going to crash...(?)
                 msg = TurboBeeMsg.loads('adsmsg.turbobee.TurboBeeMsg', fo.read())
                 
@@ -81,7 +84,7 @@ def store(qid=None):
                 return jsonify({'qi': qid, 'msg': 'Not found'}), 404
             else:
                 qid = pages.qid
-                pages.delete()
+                session.delete(pages)
 
             try:
                 session.commit()

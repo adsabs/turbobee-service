@@ -53,7 +53,7 @@ class TurboBeeADSFlask(ADSFlask):
         @return: Flask Response.
         """ 
         # by default, it is always there - but just in case...
-        ctype = page_obj.ctype or 'application/octet-stream'
+        ctype = page_obj.content_type or 'application/octet-stream'
         return Response(page_obj.content, content_type=ctype)
 
 	"""
