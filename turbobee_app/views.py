@@ -1,6 +1,6 @@
 import pdb
 from flask import url_for, current_app, request, Blueprint, jsonify
-from flask import json
+from flask import json, render_template
 from flask_discoverer import advertise
 from adsmsg import TurboBeeMsg
 from models import Pages, Records
@@ -10,6 +10,22 @@ from sqlalchemy import exc
 from sqlalchemy.orm import load_only
 
 bp = Blueprint('turbobee_app', __name__)
+
+@bp.route('/', methods=['GET'])
+def template_test():
+    return render_template('abstract.html', 
+        title='title',
+        affiliation_name='affiliation name',
+        affiliation_link='affiliation link',
+        affiliation='affiliation',
+        abstract='abstract',
+        article_pub='article publication',
+        pub_date='publication date',
+        doi='doi text',
+        doi_link='doi link',
+        bibcode='bibcode',
+        permalink='permalink',
+        keywords='keywords')
 
 @advertise(scopes=['ads-consumer:turbobee'], rate_limit = [1000, 3600*24])
 @bp.route('/store/', methods=['POST'])

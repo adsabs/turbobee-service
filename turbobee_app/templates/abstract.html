@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="s-abstract-title">
+    {{title}}
+    <a href=""></a>
+</h2>
+
+
+<button class="btn btn-xs btn-default-flat s-toggle-aff" id="toggle-aff">Show affiliations</button>
+
+<div id="authors-and-aff" class="s-authors-and-aff">
+    <ul class="list-inline">
+        <li class="author"><a href="{{affiliation_link}}">{{affiliation_name}}</a><span class="affiliation hide"> (<i>{{affiliation}}</i>)</span>;</li>
+    </ul>
+</div>
+
+<div class="s-abstract-text">
+    <h4 class="sr-only">Abstract</h4>
+    <p>
+        {{abstract}}
+    </p>
+</div>
+
+<br>
+<dl class="s-abstract-dl-horizontal">
+
+    <dt>Publication</dt>
+    <dd>
+        <div id="article-publication">***put article publication here***</div>
+    </dd>
+
+    <dt>Pub Date:</dt>
+    <dd>***put publication date here***</dd>
+
+    <dt>DOI:</dt>
+    <dd>
+        <span>
+            <a href="***put DOI here***" target="_blank" rel="noopener">***put DOI text here***</a>
+            <i class="fa fa-external-link"></i>
+        </span>
+    </dd>
+
+    <dt>Bibcode</dt>
+    <dd>***put bibcode here*** <i class="icon-help" data-toggle="popover" data-content="The bibcode is assigned by the ADS as a unique identifier for the paper." data-original-title="" title=""></i></dd>
+    <dt>Permalink:</dt>
+    <dd>
+      <a href="***put permalink here***">
+        <div class="sr-only">Permalink to abstract</div>
+        <i class="fa fa-link"></i>
+      </a>
+    </dd>
+
+    <div id="keywords">
+        <dt>Keywords</dt>
+        <dd>
+            <ul class="list-inline">
+                <li>***put keywords here***</li>
+            </ul>
+        </dd>
+    </div>
+
+
+
+</dl>
+{% endblock %}

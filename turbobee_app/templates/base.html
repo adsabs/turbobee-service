@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en"><head profile="http://a9.com/-/spec/opensearch/1.1/">
+  <meta charset="utf-8"><base href="https://ui.adsabs.harvard.edu/" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="google-site-verification" content="XxQuw38lagr8-TgtCyhAMP_6ELS9dy35fgrqo9dxw3o">
+  <title>Theory of multiple-stellar population synthesis in a non-Hamiltonian setting</title>
+  <meta name="description" content="A powerful, streamlined new Astrophysics Data System">
+  <link rel="preload" href="./styles/css/styles.7fd3dcb2.css" as="style">
+  <link rel="preload" href="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js" as="script">
+  <link rel="preload" href="./bumblebee_app.gae5652d.js" as="script">
+
+  <link rel="stylesheet" href="./styles/css/styles.7fd3dcb2.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./styles/img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" href="https://ui.adsabs.harvard.edu/opensearch.xml" title="ADS Search">
+  <noscript><script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/api2/v1543818755456/recaptcha__en.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bumblebee_app.gae5652d" src="./bumblebee_app.gae5652d.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="underscore" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.2/lodash.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="es5-shim" src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.10/es5-shim.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="google-analytics" src="//google-analytics.com/analytics.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="d3" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.6/d3.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="d3-cloud" src="//cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="backbone" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="backbone-validation" src="//cdnjs.cloudflare.com/ajax/libs/backbone.validation/0.11.3/backbone-validation-amd-min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jsonpath" src="//cdn.jsdelivr.net/npm/jsonpath@0.2.12/jsonpath.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="react" src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-with-addons.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="react-dom" src="//cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="react-redux" src="//cdnjs.cloudflare.com/ajax/libs/react-redux/4.4.5/react-redux.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="react-prop-types" src="//cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="create-react-class" src="//cdn.jsdelivr.net/npm/create-react-class@15.6.2/create-react-class.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="redux" src="//cdnjs.cloudflare.com/ajax/libs/redux/3.5.2/redux.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="redux-thunk" src="//cdnjs.cloudflare.com/ajax/libs/redux-thunk/2.1.0/redux-thunk.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="moment" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="google-recaptcha" src="//google.com/recaptcha/api.js?&amp;render=explicit&amp;onload=onRecaptchaLoad"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="select2" src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="clipboard" src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sprintf" src="//cdnjs.cloudflare.com/ajax/libs/sprintf/1.0.2/sprintf.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="marionette" src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.4.5/backbone.marionette.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="persist-js" src="//cdn.jsdelivr.net/npm/persist-js@0.3.1/src/persist.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="backbone.stickit" src="//cdnjs.cloudflare.com/ajax/libs/backbone.stickit/0.8.0/backbone.stickit.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery-ui" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.4/jquery-ui.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mathjax" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML&amp;amp;delayStartupUntil=configured"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="filesaver" src="//cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bootstrap" src="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}<style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}<style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}<style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}</head>
+
+  <body style=""><div id="MathJax_Message" style="display: none;"></div>
+    <noscript>
+      <div id="noscriptmsg">
+        <div class="h3">JavaScript Required</div>
+        <hr class="hr">
+        <p>
+          Sorry, but ADS requires JavaScript to be enabled to have the best experience.  If you cannot enable JavaScript, please use our classic site.
+        </p>
+        <p class="pull-right">
+          <a href="//ui.adsabs.harvard.edu" class="btn btn-info">Reload</a>
+          <a href="http://adsabs.harvard.edu/abstract_service.html" class="btn btn-primary">Go to Classic</a>
+        </p>
+      </div>
+
+      <!-- <p>
+          Welcome hardcode user. Your client does not speak JavaScript,
+      please follow this link to access a non-JavaScript version of this
+          website:
+      <a href="//adsabs.harvard.edu/abstract_service.html">ADS Classic</a></p> -->
+    </noscript>
+
+    <!--items for announcement of new page, and optional skip to main content link go here (inserted by master.js)-->
+
+    <a href="#main-content" id="skip-to-main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<div id="aria-announcement-container">
+    Now on
+    article abstract page
+
+</div>
+<div id="app-container">
+     <!--this is where bbb discovery gets inserted -->
+      <div id="body-template-container"><div class="s-master-page-manager" style=""><div id="navbar-container">
+  <div data-widget="NavbarWidget"><div><nav class="navbar fluid navbar-inverse">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand s-navbar-brand" href="#"><img class="s-ads-icon" src="styles/img/transparent_logo.svg" alt="ads icon">
+                <h1> <b>ads</b></h1>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li>
+                    <button type="button" class="btn btn-primary-faded feedback-button" data-toggle="modal" data-target="#feedback-modal">
+                        <i class="fa fa-comment"></i> Feedback
+                    </button>
+                </li>
+
+
+                <li class="dropdown orcid-dropdown s-orcid-dropdown">
+                    <button class="dropdown-toggle btn-link" data-toggle="dropdown" aria-expanded="false">
+                        <span class="s-orcid-title"> <img src="../../styles/img/orcid_inactive.png" alt="orcid symbol">  ORCID  <span class="caret"></span></span></button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="no-hover-style">
+                            <button class="btn-link orcid-sign-in"> Sign in to ORCID to claim papers in the ADS. </button>
+                        </li>
+                        <li class="no-hover-style">
+                            This functionality is still experimental.
+                        </li>
+                    </ul>
+                </li>
+
+                <!--end "if/else orcidLoggedIn"-->
+
+
+                <li class="dropdown">
+                    <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-question-circle about-page-icon"></i> About <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li> <a href="//ui.adsabs.harvard.edu/about/" target="_blank" rel="noopener"> <i class="fa fa-question-circle"></i> About ADS </a></li>
+                        <li> <a href="//adsabs.github.io/blog/" target="_blank" rel="noopener"> <i class="fa fa-newspaper-o"></i> ADS Blog </a></li>
+                        <li> <a href="//adsabs.github.io/help/" target="_blank" rel="noopener"> <i class="fa fa-info-circle"></i> ADS Help Pages </a></li>
+                        <li> <a href="//ui.adsabs.harvard.edu/about/careers/" target="_blank" rel="noopener"> <i class="fa fa-group"></i> Careers@ADS </a></li>
+                    </ul>
+                </li>
+
+
+                <li class="register"><a href="#user/account/register">Sign Up</a></li>
+                <li class="login"><a href="#user/account/login">Log In</a></li>
+
+            </ul>
+
+        </div>
+        <!-- /.navbar-collapse -->
+
+</nav>
+<!-- /.container-fluid -->
+</div></div>
+</div>
+
+<div id="alerts-container">
+  <div data-widget="AlertsWidget"><span class="alert-banner"></span></div>
+</div>
+
+<div id="content-container">
+  <div class="dynamic-container s-dynamic-container"><div><div id="abstract-page-layout" class="s-abstract-page-layout">
+
+    <div class="row s-stable-search-bar-height">
+        <div class="s-search-bar-full-width-container">
+            <div class="col-xs-0 col-sm-12 col-md-2 s-back-button-container">
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-7 s-search-bar-row" id="search-bar-row" data-widget="SearchWidget"><div class="s-search-bar-widget"><div role="search">
+  <div class="row">
+    <h2 class="sr-only">Search Bar to Enter New Query</h2>
+    <div class="col-sm-12 s-quick-add" aria-label="quick add fields">
+      <div id="expanded-search-form" class="unselectable">
+        <div id="field-options">
+          <span class="s-field-options">quick field:</span>
+
+          <span class="visible-sm-inline visible-md-inline visible-lg-inline">
+            <button class="btn btn-link btn-sm" title="" data-toggle="tooltip" data-field="author" data-punc="&quot;" data-original-title="search for an author, e.g. author:&quot;Kurtz,M&quot;">Author</button>
+            <button class="btn btn-link btn-sm" title="" data-toggle="tooltip" data-field="first-author" data-punc="&quot;" data-original-title="search for a first author, e.g. author:&quot;^Kurtz,M&quot;">First Author</button>
+            <button class="btn btn-link btn-sm" title="" data-toggle="tooltip" data-field="abs" data-punc="&quot;" data-original-title="limit search to abstract, title and keyword fields">Abstract</button>
+          </span>
+
+          <span class="visible-lg-inline">
+            <button class="btn btn-link btn-sm" title="" data-toggle="tooltip" data-field="year" data-original-title="e.g. year:1999 or year:1999-2016">Year</button>
+            <button class="btn btn-link btn-sm" title="" data-toggle="tooltip" data-field="full" data-punc="&quot;" data-original-title="search titles, abstract, text, keywords and acknowledgements of the articles">Fulltext</button>
+          </span>
+
+          <!--container for additional fields/operators-->
+          <span id="option-dropdown-container"><select class="quick-add-dropdown select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+<optgroup label="fields">
+  <option value="abs" data-field="abs">abstract</option>
+  <option value="abstract">abstract only</option>
+  <option value="aff">affiliation</option>
+  <option value="arxiv_class">arXiv category</option>
+  <option value="author" data-field="author">author</option>
+  <option value="bibcode">bibcode</option>
+  <option value="bibgroup">bibliographic group</option>
+  <option value="bibstem">bib abbrev, e.g. ApJ</option>
+  <option value="body">body of article</option>
+  <option value="data">data archive</option>
+  <option value="database">database</option>
+  <option value="doctype">doctype</option>
+  <option value="doi">doi</option>
+  <option value="first-author" data-field="first-author">first author</option>
+  <option value="full" data-field="full">fulltext</option>
+  <option value="identifier">identifier</option>
+  <option value="keyword">keyword</option>
+  <option value="object">object</option>
+  <option value="orcid">orcid</option>
+  <option value="page">page</option>
+  <option value="property">property</option>
+  <option value="pub">publication full name</option>
+  <option value="pubdate" data-default-value="[2000-01-01 TO 2010-01-01]">date published</option>
+  <option value="title">title</option>
+  <option value="volume">volume</option>
+  <option value="year" data-field="year">year</option>
+</optgroup>
+<optgroup label="operators">
+  <option value="citations">citations()</option>
+  <option value="references">references()</option>
+  <option value="reviews">reviews()</option>
+  <option value="topn">topn()</option>
+  <option value="trending">trending()</option>
+  <option value="useful">useful()</option>
+</optgroup>
+<optgroup label="special characters">
+  <option value="?">single wildcard: ?</option>
+  <option value="*">wildcard: *</option>
+  <option value="=">exact match: =</option>
+</optgroup>
+</select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-la3m-container"><span class="select2-selection__rendered" id="select2-la3m-container" title="abstract"><span class="select2-selection__placeholder">All Search Terms</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row"></div>
+  <div class="row">
+    <div class="col-sm-12 search-bar-input-row s-search-bar-input-row">
+      <form name="main-query">
+        <div class="form-group has-feedback">
+          <div class="input-group">
+
+            <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" class="form-control q ui-autocomplete-input" name="q" autofocus="" aria-label="Start typing a query here to begin an ADS Search" autocomplete="off" value="" data-original-title="" title="">
+            <i class="icon-clear s-clear-control hidden"></i>
+            <span class="input-group-btn">
+                       <button type="submit" class="btn btn-primary search-submit s-search-submit" aria-label="submit">
+                           <i class="fa fa-search"></i></button>
+                  </span>
+
+          </div>
+          <!-- /input-group -->
+        </div>
+        <!-- /form-group-->
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="only-show-on-landing">
+    <div class="quick-reference">
+      <div class="col-sm-6">
+        <dl class="dl-horizontal">
+          <dt>author</dt>
+          <dd>author:"huchra, john"</dd>
+          <dt>first author</dt>
+          <dd>author:"^huchra, john"</dd>
+          <dt>abstract + title</dt>
+          <dd>abs:"dark energy"</dd>
+          <dt>year</dt>
+          <dd>year:2000</dd>
+          <dt>year range</dt>
+          <dd>year:2000-2005</dd>
+          <dt>full text</dt>
+          <dd>full:"gravitational waves"</dd>
+          <dt>publication</dt>
+          <dd>bibstem:ApJ <i class="icon-help" data-toggle="tooltip" title="" data-original-title="this field requires the bibstem, or journal abbreviation--try going to the 'Paper' tab above for an easy-to-use form version"></i></dd>
+        </dl>
+      </div>
+      <div class="col-sm-6  quick-reference">
+        <dl class="dl-horizontal">
+          <dt>citations</dt>
+          <dd>citations(author:"huchra, j") <i class="icon-help" data-toggle="tooltip" title="" data-original-title="finds all papers that cite a given set of papers"></i></dd>
+          <dt>references</dt>
+          <dd>references(author:"huchra, j") <i class="icon-help" data-toggle="tooltip" title="" data-original-title="finds all papers referenced by a given set of papers"></i></dd>
+          <dt>reviews</dt>
+          <dd>reviews("gamma-ray bursts") <i class="icon-help" data-toggle="tooltip" title="" data-original-title="finds articles citing the most relevant papers on the topic being researched"></i></dd>
+          <hr>
+          <dt>refereed</dt>
+          <dd>property:refereed <i class="icon-help" data-toggle="tooltip" title="" data-original-title="limit to non-refereed papers by searching property:notrefereed"></i></dd>
+          <dt>astronomy</dt>
+          <dd>database:astronomy <i class="icon-help" data-toggle="tooltip" title="" data-original-title="limit to physics papers by searching database:physics"></i></dd>
+          <dt>OR</dt>
+          <dd>abs:(planet OR star) <i class="icon-help" data-toggle="tooltip" title="" data-original-title="default logic is AND, e.g. abs:(planet star) would be interpreted as abs:(planet AND star)"></i></dd>
+        </dl>
+      </div>
+    </div>
+
+  </div>
+
+    <div class="s-num-found">
+      <span class="s-light-font description">Your search returned</span>
+        <b><span class="num-found-container">0</span></b>
+        <span class="s-light-font"> results </span>
+    </div>
+</div>
+
+</div></div>
+        </div>
+    </div>
+    <div class="row nav-button-container s-nav-button-container">
+       <button class="btn btn-primary-faded toggle-menu s-toggle-menu "> <i class="fa fa-bars"></i> Show Menu </button>
+     </div>
+    <div class="row s-dynamic-page-body" id="dynamic-page-body">
+        <div class="s-abstract-content">
+
+            <div class="col-sm-2 nav-container s-nav-container" id="left-column"> <div>
+<nav>
+    <div class="s-nav-header s-view-nav"> <i class="icon-list"></i> <h3>view </h3> </div>
+
+
+    <a href="#abs/2019NewA...66...20P/abstract" data-widget-id="ShowAbstract">
+    <div class="abstract-nav s-nav  s-nav-selected  ">
+            <span class="s-content">
+            Abstract
+            </span>
+    </div>
+    </a>
+
+
+    <a href="#abs/2019NewA...66...20P/citations" aria-disabled="true" data-widget-id="ShowCitations">
+    <div class="abstract-nav s-nav   s-nav-inactive ">
+            <span class="s-content">
+            Citations
+            <span class="num-items"> </span>
+            </span>
+    </div>
+    </a>
+
+
+    <a href="#abs/2019NewA...66...20P/references" aria-disabled="true" data-widget-id="ShowReferences">
+    <div class="abstract-nav s-nav   s-nav-inactive ">
+            <span class="s-content">
+            References
+            <span class="num-items"> </span>
+            </span>
+    </div>
+    </a>
+
+
+    <a href="#abs/2019NewA...66...20P/coreads" aria-disabled="true" data-widget-id="ShowCoreads">
+    <div class="abstract-nav s-nav   s-nav-inactive ">
+            <span class="s-content">
+            Co-Reads
+            </span>
+    </div>
+    </a>
+
+
+    <a href="#abs/2019NewA...66...20P/tableofcontents" aria-disabled="true" data-widget-id="ShowTableofcontents">
+    <div class="abstract-nav s-nav   s-nav-inactive ">
+            <span class="s-content">
+            Volume Content
+            </span>
+    </div>
+    </a>
+
+
+    <a href="#abs/2019NewA...66...20P/graphics" aria-disabled="true" data-widget-id="ShowGraphics">
+    <div class="abstract-nav s-nav   s-nav-inactive ">
+            <span class="s-content">
+            Graphics
+            </span>
+    </div>
+    </a>
+
+
+    <a href="#abs/2019NewA...66...20P/metrics" aria-disabled="true" data-widget-id="ShowMetrics">
+    <div class="abstract-nav s-nav   s-nav-inactive ">
+            <span class="s-content">
+            Metrics
+            </span>
+    </div>
+    </a>
+
+
+    <a href="#abs/2019NewA...66...20P/export" data-widget-id="ShowPaperExport__default">
+      <div class="abstract-nav s-nav  ">
+        <span class="content">
+          Export
+        </span>
+      </div>
+    </a>
+
+</nav>
+</div></div>
+
+            <div class="col-sm-9 col-md-7 s-middle-column" id="middle-column">
+                <!--id is for screen readers-->
+                <div class="main-content-container s-main-content-container" id="main-content" tabindex="-1">
+                    <div class="print-visible"><h2 style="margin-left:6.1%;">NASA/ADS</h2> </div>
+
+                    <div id="abstract-title-container" class="s-abstract-title-container"></div>
+                    <div id="current-subview">
+                        <div data-widget="ShowAbstract"><article class="s-abstract-metadata"><!--<div id="article-navigation">|</div>-->
+
+{% block content %}{% endblock %}
+
+<br>
+<a class="small pull-right text-faded" target="_blank" rel="noopener" href="http://adsabs.harvard.edu/adsfeedback/submit_abstract.php?bibcode=2019NewA...66...20P" title="Provide feedback or suggest corrections">
+    <span class="fa-stack">
+        <i class="fa fa-comment-o fa-stack-2x"></i>
+        <i class="fa fa-exclamation fa-stack-1x"></i>
+    </span>
+    Feedback/Corrections?
+</a>
+
+</article></div>
+                        <div data-widget="ShowCitations"></div>
+                        <div data-widget="ShowReferences"></div>
+                        <div data-widget="ShowCoreads"></div>
+                        <div data-widget="ShowTableofcontents"></div>
+                        <div data-widget="ShowSimilar" data-debug="true"></div>
+                        <div data-widget="ShowGraphics"></div>
+                        <div data-widget="ShowPaperExport" data-origin="abstract"></div>
+                        <div data-widget="ShowMetrics" data-allow-redirect="false"></div>
+                        <div data-widget="MetaTagsWidget"><div></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="s-right-col-container col-sm-3 col-lg-2 s-right-column" id="right-col-container">
+                <div data-widget="ShowResources"><div><div data-reactroot="" class="s-right-col-widget-container" style="padding: 10px;"><div class="text-center text-muted"><i class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i><span class="sr-only">Loading</span></div></div></div></div>
+                <div data-widget="ShowLibraryAdd"><div class="query-info-widget s-query-info-widget"></div></div>
+                <div data-widget="ShowGraphicsSidebar"><div class="s-graphics-sidebar graphics-sidebar"></div></div>
+                <div data-widget="ShowAssociated"><div><!-- react-empty: 1 --></div></div>
+            </div>
+
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+</div>
+
+</div></div>
+</div>
+
+<div id="footer-container">
+  <div data-widget="FooterWidget"><div class="footer s-footer"><footer>
+  <div class="__footer_wrapper">
+    <div class="__footer_brand">
+      © The SAO/NASA Astrophysics Data System
+      <div class="__footer_brand_extra">
+        <p>
+          <i class="fa fa-envelope"></i> adshelp[at]cfa.harvard.edu
+        </p>
+        <p>
+          The ADS is operated by the Smithsonian Astrophysical Observatory under NASA Cooperative Agreement <em>NNX16AC86A</em>
+        </p>
+      </div>
+      <div class="__footer_brand_logos">
+        <a href="http://www.nasa.gov" target="_blank" rel="noopener">
+          <img src="styles/img/nasa.svg" alt="NASA logo">
+        </a>
+        <a href="http://www.si.edu" target="_blank" rel="noopener">
+          <img class="smithsonian" src="styles/img/smithsonian.svg" alt="Smithsonian logo">
+        </a>
+        <a href="https://www.cfa.harvard.edu/" target="_blank" rel="noopener">
+          <img src="styles/img/cfa.png" title="Harvard Center for Astrophysics logo">
+        </a>
+      </div>
+    </div>
+    <div class="__footer_list">
+      <div class="__footer_list_title">
+        Resources
+      </div>
+      <ul class="__footer_links">
+        <li>
+          <a href="//ui.adsabs.harvard.edu/about/" target="_blank" rel="noopener">
+            <i class="fa fa-question-circle"></i> About ADS
+          </a>
+        </li>
+        <li>
+          <a href="//adsabs.github.io/help/" target="_blank" rel="noopener">
+            <i class="fa fa-info-circle"></i> ADS Help
+          </a>
+        </li>
+        <li>
+          <a href="//ui.adsabs.harvard.edu/about/careers/" target="_blank" rel="noopener">
+            <i class="fa fa-group"></i> Careers@ADS
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="__footer_list">
+      <div class="__footer_list_title">
+        Social
+      </div>
+      <ul class="__footer_links">
+        <li>
+          <a href="//twitter.com/adsabs" target="_blank" rel="noopener">
+            <i class="fa fa-twitter"></i> @adsabs
+          </a>
+        </li>
+        <li>
+          <a href="//adsabs.github.io/blog/" target="_blank" rel="noopener">
+            <i class="fa fa-newspaper-o"></i> ADS Blog
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="__footer_list">
+      <div class="__footer_list_title">
+        Project
+      </div>
+      <ul class="__footer_links">
+        <li>
+          <a href="https://adsisdownorjustme.herokuapp.com/" target="_blank" rel="noopener">Is ADS down? (or is it just me...)</a>
+        </li>
+        <li>
+          <a href="http://adsabs.harvard.edu/mirrors.html" target="_blank" rel="noopener">ADS Mirrors</a>
+        </li>
+        <li>
+          <a href="http://www.si.edu" target="_blank" rel="noopener">Smithsonian Institution</a>
+        </li>
+        <li>
+          <a href="http://www.si.edu/Privacy" target="_blank" rel="noopener">Smithsonian Privacy Notice</a>
+        </li>
+        <li>
+          <a href="http://www.si.edu/Termsofuse" target="_blank" rel="noopener">Smithsonian Terms of Use</a>
+        </li>
+        <li>
+          <a href="http://www.cfa.harvard.edu/sao" target="_blank" rel="noopener">Smithsonian Astrophysical Observatory</a>
+        </li>
+        <li>
+          <a href="http://www.nasa.gov" target="_blank" rel="noopener">NASA</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</div></div>
+</div>
+</div></div>
+    </div>
+    <!--  -->
+    <script type="application/ld+json">
+      {"@context":"http://schema.org","@type":"WebSite","name":"ADS","alternateName":"Astrophysics Data System","url":"https://ui.adsabs.harvard.edu"}
+    </script>
+    <!--  -->
+    <script type="application/ld+json">
+      {"@context":"http://schema.org","@type":"WebSite","url":"https://ui.absads.harvard.edu/","potentialAction":{"@type":"SearchAction","target":"https://ui.adsabs.harvard.edu/#search/q={search_term_string}","query-input":"required name=search_term_string"}}
+    </script>
+    <!--  -->
+    <script>
+        // define waitSeconds above require script tag
+        // to override the default, until main.js loads
+        //see https://github.com/yeoman/yeoman/issues/1051
+        window.require = {
+            waitSeconds: 30
+        };
+
+        // Progress Bar
+        (function () {
+          var progressBar = document.getElementById('app_loading_progress');
+          var message = document.getElementById('app_loading_message');
+          var progressInner = document.querySelector('#app_loading_progress>div');
+          var progressValue = 0;
+
+          window.__setAppLoadingProgress = function (val, msg) {
+              progressBar.setAttribute('aria-valuenow', val);
+              progressBar.style = 'width: ' + val + '%';
+              progressInner.innerText = val + '% Complete';
+              message.innerHTML = msg ? msg : message.innerHTML;
+              progressValue = val;
+          };
+          setTimeout(function () { window.__setAppLoadingProgress(10); }, 200);
+          setTimeout(function () { window.__setAppLoadingProgress(15); }, 500);
+          window.__setAppLoadingProgress(5, 'Downloading Assets');
+          window.__PAGE_LOAD_TIMESTAMP = new Date();
+
+          // Show a reload button if the page is taking too long
+          setTimeout(function check () {
+            if (progressValue !== 100) {
+              var msg = 'Loading the application is taking a long time... ';
+              msg += '<button role="button" onclick="location.reload()" class="btn btn-default">Reload</button>';
+              window.__setAppLoadingProgress(progressValue, msg);
+            } else {
+              setTimeout(check, 10000);
+            }
+          }, 10000);
+        })();
+
+    </script>
+
+    <!-- start the discovery application -->
+    <script data-main="./bumblebee_app.gae5652d.js" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script>
+        !window.requirejs && document.write('<script data-main="./bumblebee_app.gae5652d.js" src="./libs/requirejs/require.js">\x3C/script>');
+    </script>
+
+
+<div class="modal fade" id="feedback-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Feedback Form</h4>
+            </div>
+            <div class="modal-body">
+                <form class="feedback-form">
+
+                    <input type="hidden" name="_subject" value="Bumblebee Feedback">
+                    <input type="hidden" name="feedback-type" value="feedback">
+
+                    <input type="text" name="_gotcha" style="display:none">
+
+                    <div class="form-group half-width">
+                        <label> Name
+                            <input class="form-control" type="text" name="name" required="">
+                        </label>
+                    </div>
+                    <div class="form-group half-width">
+                        <label> Email
+                            <input class="form-control" type="email" name="_replyto" required="">
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Feedback <br>
+                        <textarea rows="8" cols="50" name="comments" required=""></textarea>
+                        </label>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="g-recaptcha"></div>
+                    </div>
+                    <button class="btn btn-success" type="submit" value="Send">Submit</button>
+                </form>
+
+                <br>
+                <p>You can also reach us at <b>adshelp [at] cfa.harvard.edu</b></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close without submitting</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="display: none;"></ul></body></html>
