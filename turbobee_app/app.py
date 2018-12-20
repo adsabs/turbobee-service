@@ -9,6 +9,7 @@ from sqlalchemy.orm import load_only
 from uuid import uuid4
 from sqlalchemy.exc import IntegrityError
 from adsmsg import TurboBeeMsg, Status
+from flask_discoverer import Discoverer
 
 def create_app(**config):
     """
@@ -17,6 +18,7 @@ def create_app(**config):
     """
 
     app = TurboBeeADSFlask('turbobee', local_config=config)
+    Discoverer(app)
     app.url_map.strict_slashes = False    
     app.register_blueprint(bp)
     return app

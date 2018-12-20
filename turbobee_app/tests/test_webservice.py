@@ -66,7 +66,12 @@ class TestServices(TestCase):
         self.assertEqual(r.status_code, 200)
         assert len(r.json['created']) == 1
         assert len(r.json['updated']) == 1
+    
         
+        r = self.client.get(url_for('turbobee_app.store_get', qid=msg.qid))
+        self.assertEqual(r.status_code, 200)
+        r = self.client.head(url_for('turbobee_app.store_get', qid=msg.qid))
+        self.assertEqual(r.status_code, 200)
 
     def test_proto_empty(self):
         msg = TurboBeeMsg()

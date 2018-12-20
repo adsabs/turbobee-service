@@ -15,10 +15,28 @@ bp = Blueprint('turbobee_app', __name__)
 
 
 
+@advertise(scopes=[''], rate_limit = [1000, 3600*24])
+@bp.route('/<string:qid>', methods=['GET', 'HEAD'])
+def store_get(qid=None):
+    if request.method == 'GET':
+        with current_app.session_scope() as session:
+            page = session.query(Pages).filter_by(qid=qid).first()
+            if not page:
+                return jsonify({'qid': qid, 'msg': 'Not found'}), 404
+            return current_app.wrap_response(page)
+    elif request.method == 'HEAD':
+        with current_app.session_scope() as session:
+            # TODO: make it more efficient
+            page = session.query(Pages).filter_by(qid=qid).options(load_only('id')).first()
+            if page:
+                return '', 200
+            else:
+                return '', 404
+
 
 @advertise(scopes=['ads-consumer:turbobee'], rate_limit = [1000, 3600*24])
 @bp.route('/', methods=['POST'])
-@bp.route('/<string:qid>', methods=['GET', 'POST', 'DELETE'])
+@bp.route('/<string:qid>', methods=['POST', 'DELETE'])
 def store(qid=None):
     
     if request.method == 'GET':
