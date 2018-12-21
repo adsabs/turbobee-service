@@ -37,13 +37,7 @@ def store_get(qid=None):
 @bp.route('/update/<string:qid>', methods=['POST', 'DELETE'])
 def store(qid=None):
     
-    if request.method == 'GET':
-        with current_app.session_scope() as session:
-            page = session.query(Pages).filter_by(qid=qid).first()
-            if not page:
-                return jsonify({'qid': qid, 'msg': 'Not found'}), 404
-            return current_app.wrap_response(page)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         out = {}
         
         # there might be many objects in there...
