@@ -1,4 +1,3 @@
-
 import unittest
 from turbobee_app import app, models
 import os, json
@@ -7,6 +6,8 @@ from adsmsg import TurboBeeMsg, Status
 from adsmutils import get_date
 from datetime import datetime
 from turbobee_app.tests.base import TestCaseDatabase
+import dateutil.parser
+import pdb
 
 class TestCase(TestCaseDatabase):
 
@@ -105,6 +106,23 @@ class TestCase(TestCaseDatabase):
         assert set(r['updated']) == set([msg.qid, msg2.qid])
         
         
+    def test_timestamp(self):
+        msg = TurboBeeMsg()
+        now = datetime.utcnow()
+        
+        #msg.created = msg.get_timestamp(now)
+        msg.updated = msg.get_timestamp(now)
+        msg.expires = msg.get_timestamp(now)
+        msg.eol = msg.get_timestamp(now)
+        msg.set_value('hello world')
+        msg.ctype = msg.ContentType.html
+        msg.target = 'https:///some.com'
+        msg.owner = 234
+        
+        r = self.app.set_pages([msg])
+        pages = list(self.app.get_pages(r['created']))
+        hr = dateutil.parser.parse(pages[0]['created']).hour
+        assert hr == now.hour 
         
 if __name__ == '__main__':
     unittest.main()
