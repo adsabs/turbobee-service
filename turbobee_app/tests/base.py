@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import testing.postgresql
 from flask_testing import TestCase
 from turbobee_app import app
