@@ -78,7 +78,24 @@ class TestServices(TestCase):
         r = self.client.head(url_for('turbobee_app.store_get', qid='foo'))
         self.assertEqual(r.status_code, 404)
         
-
+    
+    def test_files_form_post(self):
+        """Check we can send data through both channels."""
+        msg = TurboBeeMsg(value=u'\u6789'.encode('utf8'))
+        msg2 = TurboBeeMsg(value=u'\u6789'.encode('utf8'))
+        r = self.client.post(
+            url_for('turbobee_app.store'), 
+            content_type='multipart/form-data',
+            data={
+                'foo': msg.dump()[1],
+                'bar': (StringIO(msg2.dump()[1]), 'turbobee_msg.proto'),
+            })
+        assert len(r.json['created']) == 2
+        msgs = list(self.app.get_pages(r.json['created']))
+        for m in msgs:
+            m['content'].decode('utf8') == u'\u6789'
+        
+    
     def test_proto_empty(self):
         msg = TurboBeeMsg()
         my_data = {'file_field': (StringIO(msg.dump()[1]), 'turbobee_msg.proto') }

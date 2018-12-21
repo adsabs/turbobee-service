@@ -45,8 +45,6 @@ def store(qid=None):
             return current_app.wrap_response(page)
     elif request.method == 'POST':
         out = {}
-        if not request.files:
-            return jsonify({'qid': qid, 'msg': 'Invalid params, missing data stream'}), 501
         
         # there might be many objects in there...
         msgs = []
@@ -55,9 +53,18 @@ def store(qid=None):
             if not hasattr(fo, 'read'):
                 continue # not a file object
             
-            # assuming we are not going to crash...(?)
+            # on error, we'll crash early; that's OK
             msg = TurboBeeMsg.loads('adsmsg.turbobee.TurboBeeMsg', fo.read())
             msgs.append(msg)
+        
+        # also read data posted the normal way
+        for k, v in request.form.items():
+            msg = TurboBeeMsg.loads('adsmsg.turbobee.TurboBeeMsg', v.encode('utf8'))
+            msgs.append(msg)
+        
+        if not len(msgs):
+            return jsonify({'msg': 'Empty stream, no messages were received'}), 501
+            
             
         out = []
         if len(msgs):
