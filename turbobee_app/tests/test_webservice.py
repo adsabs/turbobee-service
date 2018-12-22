@@ -7,6 +7,7 @@ from mock import mock
 from adsmsg import TurboBeeMsg
 import datetime as dt
 from StringIO import StringIO
+import base64
 
 class TestServices(TestCase):
     '''Tests that each route is an http response'''
@@ -87,7 +88,7 @@ class TestServices(TestCase):
             url_for('turbobee_app.store'), 
             content_type='multipart/form-data',
             data={
-                'foo': msg.dump()[1],
+                'foo': base64.encodestring(msg.dump()[1]),
                 'bar': (StringIO(msg2.dump()[1]), 'turbobee_msg.proto'),
             })
         assert len(r.json['created']) == 2

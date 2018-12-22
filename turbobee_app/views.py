@@ -8,6 +8,7 @@ import datetime as dt
 from sqlalchemy import exc
 from sqlalchemy.orm import load_only
 from adsmutils import get_date
+import base64
 
 bp = Blueprint('turbobee_app', __name__)
 
@@ -53,7 +54,7 @@ def store(qid=None):
         
         # also read data posted the normal way
         for k, v in request.form.items():
-            msg = TurboBeeMsg.loads('adsmsg.turbobee.TurboBeeMsg', v.encode('utf8'))
+            msg = TurboBeeMsg.loads('adsmsg.turbobee.TurboBeeMsg', base64.decodestring(v))
             msgs.append(msg)
         
         if not len(msgs):
