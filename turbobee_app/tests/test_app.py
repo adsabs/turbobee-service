@@ -105,24 +105,5 @@ class TestCase(TestCaseDatabase):
         r = self.app.set_pages([msg, msg2, msg, msg, msg], one_by_one=True)
         assert set(r['updated']) == set([msg.qid, msg2.qid])
         
-        
-    def test_timestamp(self):
-        msg = TurboBeeMsg()
-        now = datetime.utcnow()
-        
-        #msg.created = msg.get_timestamp(now)
-        msg.updated = msg.get_timestamp(now)
-        msg.expires = msg.get_timestamp(now)
-        msg.eol = msg.get_timestamp(now)
-        msg.set_value('hello world')
-        msg.ctype = msg.ContentType.html
-        msg.target = 'https:///some.com'
-        msg.owner = 234
-        
-        r = self.app.set_pages([msg])
-        pages = list(self.app.get_pages(r['created']))
-        hr = dateutil.parser.parse(pages[0]['created']).hour
-        assert hr == now.hour 
-        
 if __name__ == '__main__':
     unittest.main()
