@@ -9,6 +9,7 @@ from sqlalchemy import exc
 from sqlalchemy.orm import load_only
 from adsmutils import get_date
 import dateutil.parser
+import base64
 
 bp = Blueprint('turbobee_app', __name__)
 
@@ -38,16 +39,8 @@ def store_get(qid=None):
 @bp.route('/update/<string:qid>', methods=['POST', 'DELETE'])
 def store(qid=None):
     
-    if request.method == 'GET':
-        with current_app.session_scope() as session:
-            page = session.query(Pages).filter_by(qid=qid).first()
-            if not page:
-                return jsonify({'qid': qid, 'msg': 'Not found'}), 404
-            return current_app.wrap_response(page)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         out = {}
-        if not request.files:
-            return jsonify({'qid': qid, 'msg': 'Invalid params, missing data stream'}), 501
         
         # there might be many objects in there...
         msgs = []
@@ -56,9 +49,18 @@ def store(qid=None):
             if not hasattr(fo, 'read'):
                 continue # not a file object
             
-            # assuming we are not going to crash...(?)
+            # on error, we'll crash early; that's OK
             msg = TurboBeeMsg.loads('adsmsg.turbobee.TurboBeeMsg', fo.read())
             msgs.append(msg)
+        
+        # also read data posted the normal way
+        for k, v in request.form.items():
+            msg = TurboBeeMsg.loads('adsmsg.turbobee.TurboBeeMsg', base64.decodestring(v))
+            msgs.append(msg)
+        
+        if not len(msgs):
+            return jsonify({'msg': 'Empty stream, no messages were received'}), 501
+            
             
         out = []
         if len(msgs):
