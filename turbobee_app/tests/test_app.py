@@ -6,7 +6,6 @@ from adsmsg import TurboBeeMsg, Status
 from adsmutils import get_date
 from datetime import datetime
 from turbobee_app.tests.base import TestCaseDatabase
-import dateutil.parser
 
 class TestCase(TestCaseDatabase):
 
