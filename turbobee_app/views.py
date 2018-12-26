@@ -1,4 +1,3 @@
-import pdb
 from flask import url_for, current_app, request, Blueprint, jsonify
 from flask import json
 from flask_discoverer import advertise
@@ -11,8 +10,6 @@ from adsmutils import get_date
 import base64
 
 bp = Blueprint('turbobee_app', __name__)
-
-
 
 @advertise(scopes=[], rate_limit = [1000, 3600*24])
 @bp.route('/<string:qid>', methods=['GET', 'HEAD'])
@@ -88,11 +85,6 @@ def store(qid=None):
             return jsonify({'qid': qid, 'status': 'deleted'}), 200
 
 
-# convert datestring s to datetime object
-def str_to_dt(s):
-    return dt.datetime.strptime(s, '%Y-%m-%d %H:%M:%S.%f')
-
-
 @advertise(scopes=['ads-consumer:turbobee'], rate_limit = [1000, 3600*24])
 @bp.route('/search', methods=['GET'])
 def search():
@@ -104,17 +96,17 @@ def search():
     with current_app.session_scope() as session:
 
         if 'begin' in keys and 'end' in keys:
-            begin = str_to_dt(request.args['begin'])
-            end = str_to_dt(request.args['end'])
+            begin = get_date(request.args['begin'])
+            end = get_date(request.args['end'])
             query = session.query(Pages).filter(Pages.created.between(begin, end))
         elif 'begin' in keys: # search for all records after begin
-            begin = str_to_dt(request.args['begin'])
+            begin = get_date(request.args['begin'])
             query = session.query(Pages).filter(Pages.created >= begin)
         elif 'end' in keys: # search for all records before end
-            end = str_to_dt(request.args['end'])
+            end = get_date(request.args['end'])
             query = session.query(Pages).filter(Pages.created <= end)
         elif 'at' in keys: # search for all records created at specific timestamp
-            at = str_to_dt(request.args['at'])
+            at = get_date(request.args['at'])
             query = session.query(Pages).filter(Pages.created == at)
         else:
             return jsonify({'msg': 'Invalid parameters %s' % keys}), 505
@@ -137,9 +129,4 @@ def search():
         except Exception as e:
             current_app.logger.error('Failed request: %s (error=%s)', keys, e)
             return jsonify({'msg': e.message}), 500
-
-            
-
-
-
 

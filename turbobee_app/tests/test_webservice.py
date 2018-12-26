@@ -8,6 +8,7 @@ from adsmsg import TurboBeeMsg
 import datetime as dt
 from StringIO import StringIO
 import base64
+from adsmutils import get_date
 
 class TestServices(TestCase):
     '''Tests that each route is an http response'''
@@ -26,13 +27,10 @@ class TestServices(TestCase):
         Base.metadata.create_all()
         return a
 
-
     def tearDown(self):
         unittest.TestCase.tearDown(self)
         Base.metadata.drop_all()
         self.app.db = None
-
-
 
     def test_store_post(self):
         msg = TurboBeeMsg()
@@ -163,15 +161,23 @@ class TestServices(TestCase):
         self.app.db.session.add(page2)
         self.app.db.session.commit()
 
-        begin = dt.datetime.utcnow() - dt.timedelta(days=30)
-        end = dt.datetime.utcnow() + dt.timedelta(days=30)
+        begin = get_date(dt.datetime.utcnow()) - dt.timedelta(hours=1)
+        end = get_date(dt.datetime.utcnow()) + dt.timedelta(hours=1)
 
+        # url_for translates to: 
+        # '/search?begin=2018-12-26T18%3A27%3A02.367394%2B00%3A00&rows=1&end=2018-12-26T20%3A27%3A02.367412%2B00%3A00'
         r = self.client.get(
-            url_for('turbobee_app.search', begin=begin, end=end, rows=1))
+            url_for('turbobee_app.search', begin=begin.isoformat(), end=end.isoformat(), rows=1))
+        
+        first_page = r.json[0]
+        created = get_date(first_page['created'])
 
+        first_page = r.json[0]
+        created = dateutil.parser.parse(first_page['created'])
+
+        self.assertLess(begin, created) 
+        self.assertGreater(end, created)
         self.assertEqual(r.status_code, 200)
-
-
 
         
 if __name__ == '__main__':

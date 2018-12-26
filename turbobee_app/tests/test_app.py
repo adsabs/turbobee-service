@@ -1,4 +1,3 @@
-
 import unittest
 from turbobee_app import app, models
 import os, json
@@ -103,8 +102,6 @@ class TestCase(TestCaseDatabase):
         
         r = self.app.set_pages([msg, msg2, msg, msg, msg], one_by_one=True)
         assert set(r['updated']) == set([msg.qid, msg2.qid])
-        
-        
         
 if __name__ == '__main__':
     unittest.main()
