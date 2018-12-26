@@ -6,6 +6,8 @@ from turbobee_app import app
 from mock import mock
 from adsmsg import TurboBeeMsg
 import datetime as dt
+import dateutil.parser
+from dateutil.tz import tzutc
 from StringIO import StringIO
 import base64
 
@@ -26,13 +28,10 @@ class TestServices(TestCase):
         Base.metadata.create_all()
         return a
 
-
     def tearDown(self):
         unittest.TestCase.tearDown(self)
         Base.metadata.drop_all()
         self.app.db = None
-
-
 
     def test_store_post(self):
         msg = TurboBeeMsg()
@@ -163,15 +162,18 @@ class TestServices(TestCase):
         self.app.db.session.add(page2)
         self.app.db.session.commit()
 
-        begin = dt.datetime.utcnow() - dt.timedelta(days=30)
-        end = dt.datetime.utcnow() + dt.timedelta(days=30)
+        begin = dt.datetime.now(pytz.utc) - dt.timedelta(hours=1)
+        end = dt.datetime.now(pytz.utc) + dt.timedelta(hours=1)
 
         r = self.client.get(
             url_for('turbobee_app.search', begin=begin, end=end, rows=1))
 
+        first_page = r.json[0]
+        created = dateutil.parser.parse(first_page['created'])
+
+        self.assertLess(begin, created) 
+        self.assertGreater(end, created)
         self.assertEqual(r.status_code, 200)
-
-
 
         
 if __name__ == '__main__':
