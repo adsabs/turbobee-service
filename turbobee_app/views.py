@@ -7,6 +7,7 @@ import datetime as dt
 from sqlalchemy import exc
 from sqlalchemy.orm import load_only
 from adsmutils import get_date
+import dateutil.parser
 import base64
 
 bp = Blueprint('turbobee_app', __name__)
@@ -96,6 +97,7 @@ def search():
     with current_app.session_scope() as session:
 
         if 'begin' in keys and 'end' in keys:
+<<<<<<< HEAD
             begin = get_date(request.args['begin'])
             end = get_date(request.args['end'])
             query = session.query(Pages).filter(Pages.created.between(begin, end))
@@ -107,6 +109,19 @@ def search():
             query = session.query(Pages).filter(Pages.created <= end)
         elif 'at' in keys: # search for all records created at specific timestamp
             at = get_date(request.args['at'])
+=======
+            begin = dateutil.parser.parse(request.args['begin'])
+            end = dateutil.parser.parse(request.args['end'])
+            query = session.query(Pages).filter(Pages.created.between(begin, end))
+        elif 'begin' in keys: # search for all records after begin
+            begin = dateutil.parser.parse(request.args['begin'])
+            query = session.query(Pages).filter(Pages.created >= begin)
+        elif 'end' in keys: # search for all records before end
+            end = dateutil.parser.parse(request.args['end'])
+            query = session.query(Pages).filter(Pages.created <= end)
+        elif 'at' in keys: # search for all records created at specific timestamp
+            at = dateutil.parser.parse(request.args['at'])
+>>>>>>> 160f380610a5e9268f83c927897d396ae62c3e1a
             query = session.query(Pages).filter(Pages.created == at)
         else:
             return jsonify({'msg': 'Invalid parameters %s' % keys}), 505

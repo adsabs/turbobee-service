@@ -1,12 +1,17 @@
 from flask_testing import TestCase
 from flask import url_for, request
 import unittest
+import sys
+sys.path.append('../')
 from turbobee_app.models import Base, Pages
 from turbobee_app import app
 from mock import mock
 from adsmsg import TurboBeeMsg
 import datetime as dt
+import dateutil.parser
+from dateutil.tz import tzutc
 from StringIO import StringIO
+import pytz
 import base64
 from adsmutils import get_date
 
@@ -161,8 +166,13 @@ class TestServices(TestCase):
         self.app.db.session.add(page2)
         self.app.db.session.commit()
 
+<<<<<<< HEAD
         begin = get_date(dt.datetime.utcnow()) - dt.timedelta(hours=1)
         end = get_date(dt.datetime.utcnow()) + dt.timedelta(hours=1)
+=======
+        begin = dt.datetime.now(pytz.utc) - dt.timedelta(hours=1)
+        end = dt.datetime.now(pytz.utc) + dt.timedelta(hours=1)
+>>>>>>> 160f380610a5e9268f83c927897d396ae62c3e1a
 
         # url_for translates to: 
         # '/search?begin=2018-12-26T18%3A27%3A02.367394%2B00%3A00&rows=1&end=2018-12-26T20%3A27%3A02.367412%2B00%3A00'
@@ -172,6 +182,12 @@ class TestServices(TestCase):
         first_page = r.json[0]
         created = get_date(first_page['created'])
 
+<<<<<<< HEAD
+=======
+        first_page = r.json[0]
+        created = dateutil.parser.parse(first_page['created'])
+
+>>>>>>> 160f380610a5e9268f83c927897d396ae62c3e1a
         self.assertLess(begin, created) 
         self.assertGreater(end, created)
         self.assertEqual(r.status_code, 200)
