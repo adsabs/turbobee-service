@@ -1,4 +1,3 @@
-import pdb
 from flask import url_for, current_app, request, Blueprint, jsonify
 from flask import json
 from flask_discoverer import advertise
@@ -8,15 +7,9 @@ import datetime as dt
 from sqlalchemy import exc
 from sqlalchemy.orm import load_only
 from adsmutils import get_date
-<<<<<<< HEAD
 import base64
-=======
-import dateutil.parser
->>>>>>> fixing timezone issue
 
 bp = Blueprint('turbobee_app', __name__)
-
-
 
 @advertise(scopes=[], rate_limit = [1000, 3600*24])
 @bp.route('/<string:qid>', methods=['GET', 'HEAD'])
@@ -103,17 +96,17 @@ def search():
     with current_app.session_scope() as session:
 
         if 'begin' in keys and 'end' in keys:
-            begin = dateutil.parser.parse(request.args['begin'])
-            end = dateutil.parser.parse(request.args['end'])
+            begin = get_date(request.args['begin'])
+            end = get_date(request.args['end'])
             query = session.query(Pages).filter(Pages.created.between(begin, end))
         elif 'begin' in keys: # search for all records after begin
-            begin = dateutil.parser.parse(request.args['begin'])
+            begin = get_date(request.args['begin'])
             query = session.query(Pages).filter(Pages.created >= begin)
         elif 'end' in keys: # search for all records before end
-            end = dateutil.parser.parse(request.args['end'])
+            end = get_date(request.args['end'])
             query = session.query(Pages).filter(Pages.created <= end)
         elif 'at' in keys: # search for all records created at specific timestamp
-            at = dateutil.parser.parse(request.args['at'])
+            at = get_date(request.args['at'])
             query = session.query(Pages).filter(Pages.created == at)
         else:
             return jsonify({'msg': 'Invalid parameters %s' % keys}), 505

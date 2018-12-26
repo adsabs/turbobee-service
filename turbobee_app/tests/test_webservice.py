@@ -6,10 +6,9 @@ from turbobee_app import app
 from mock import mock
 from adsmsg import TurboBeeMsg
 import datetime as dt
-import dateutil.parser
-from dateutil.tz import tzutc
 from StringIO import StringIO
 import base64
+from adsmutils import get_date
 
 class TestServices(TestCase):
     '''Tests that each route is an http response'''
@@ -162,14 +161,16 @@ class TestServices(TestCase):
         self.app.db.session.add(page2)
         self.app.db.session.commit()
 
-        begin = dt.datetime.now(pytz.utc) - dt.timedelta(hours=1)
-        end = dt.datetime.now(pytz.utc) + dt.timedelta(hours=1)
+        begin = get_date(dt.datetime.utcnow()) - dt.timedelta(hours=1)
+        end = get_date(dt.datetime.utcnow()) + dt.timedelta(hours=1)
 
+        # url_for translates to: 
+        # '/search?begin=2018-12-26T18%3A27%3A02.367394%2B00%3A00&rows=1&end=2018-12-26T20%3A27%3A02.367412%2B00%3A00'
         r = self.client.get(
-            url_for('turbobee_app.search', begin=begin, end=end, rows=1))
-
+            url_for('turbobee_app.search', begin=begin.isoformat(), end=end.isoformat(), rows=1))
+        
         first_page = r.json[0]
-        created = dateutil.parser.parse(first_page['created'])
+        created = get_date(first_page['created'])
 
         self.assertLess(begin, created) 
         self.assertGreater(end, created)
