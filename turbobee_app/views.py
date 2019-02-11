@@ -108,6 +108,8 @@ def search():
         elif 'at' in keys: # search for all records created at specific timestamp
             at = get_date(request.args['at'])
             query = session.query(Pages).filter(Pages.created == at)
+        elif 'null' in keys:
+            query = session.query(Pages).filter(Pages.created == None)
         else:
             return jsonify({'msg': 'Invalid parameters %s' % keys}), 505
             
