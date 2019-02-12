@@ -112,6 +112,9 @@ def search():
             query = session.query(Pages).filter(Pages.created == None)
         else:
             return jsonify({'msg': 'Invalid parameters %s' % keys}), 505
+        
+        if 'last_id' in keys:
+            query = query.where(Pages.id > keys['last_id'])
             
         query = query.order_by(Pages.updated.asc()) \
             .limit(rows)
