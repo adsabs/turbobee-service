@@ -172,8 +172,6 @@ class TestServices(TestCase):
         first_page = r.json[0]
         created = get_date(first_page['created'])
 
-        first_page = r.json[0]
-        created = dateutil.parser.parse(first_page['created'])
 
         self.assertLess(begin, created) 
         self.assertGreater(end, created)

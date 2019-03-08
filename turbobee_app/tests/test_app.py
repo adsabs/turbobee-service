@@ -45,7 +45,7 @@ class TestCase(TestCaseDatabase):
         expected = {
             'id': 1,
             'target': u'https:///some.com', 
-            'content_type': u'application/html', 
+            'content_type': u'text/html', 
             'content': 'hello world', 
             'created': get_date(now).isoformat(), 
             'updated': get_date(now).isoformat(), 

@@ -52,7 +52,7 @@ class TurboBeeADSFlask(ADSFlask):
         """
         if not msg.ctype:
             return 'application/octet-stream'
-        return 'application/' + ctypes[msg.ctype]
+        return 'text/' + ctypes[msg.ctype]
     
     def wrap_response(self, page_obj):
         """Prepares a flask response object with appropriate 
